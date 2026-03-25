@@ -41,7 +41,9 @@ public class ToolService {
         try {
             document = Jsoup.connect(normalizedUrl)
                     .userAgent("Mozilla/5.0")
-                    .timeout(20000)
+                    .header("Accept", "text/html")
+                    .header("Accept-Language", "en-US")
+                    .timeout(60000)
                     .get();
         } catch (Exception e) {
             throw new IllegalArgumentException("Unable to fetch website: " + e.getMessage());
@@ -55,9 +57,12 @@ public class ToolService {
             }
 
             String lower = link.toLowerCase();
-            if (lower.contains("api") || lower.contains("swagger") || lower.contains("openapi")
-                    || lower.contains("graphql") || lower.contains("/v1") || lower.contains("/v2")
-                    || lower.endsWith("openapi.json") || lower.endsWith("swagger.json")) {
+
+            // ✅ Updated filter (clean API detection)
+            if (lower.contains("/api") || lower.contains("/v1") || lower.contains("/v2")
+                    || lower.contains("swagger") || lower.contains("openapi")
+                    || lower.contains("graphql")
+                    || lower.endsWith(".json")) {
                 candidates.add(link);
             }
         }
