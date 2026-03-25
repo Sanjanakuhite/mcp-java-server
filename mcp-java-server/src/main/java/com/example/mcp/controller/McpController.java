@@ -27,6 +27,7 @@ public class McpController {
     private static final String JSON_RPC_VERSION = "2.0";
     private static final String PROTOCOL_VERSION = "2025-06-18";
 
+
     private final ToolService toolService;
     private final ObjectMapper objectMapper;
     private final String allowedOrigins;
