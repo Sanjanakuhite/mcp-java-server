@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mcp-java-server
+    env: java
+    plan: free
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/mcp-java-server-1.0.0.jar
+    envVars:
+      - key: MCP_ALLOWED_ORIGINS
+        value: "*"
